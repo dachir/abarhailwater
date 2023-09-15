@@ -1,0 +1,18 @@
+include MANIFEST.in
+include requirements.txt
+include *.json
+include *.md
+include *.py
+include *.txt
+recursive-include abarhailwater *.css
+recursive-include abarhailwater *.csv
+recursive-include abarhailwater *.html
+recursive-include abarhailwater *.ico
+recursive-include abarhailwater *.js
+recursive-include abarhailwater *.json
+recursive-include abarhailwater *.md
+recursive-include abarhailwater *.png
+recursive-include abarhailwater *.py
+recursive-include abarhailwater *.svg
+recursive-include abarhailwater *.txt
+recursive-exclude abarhailwater *.pyc
