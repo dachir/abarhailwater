@@ -42,6 +42,7 @@ class SalesData(Document):
             )
 
             if details :
+                frappe.throw(str(args))
                 sale = frappe.get_doc(args)
                 sale.insert()
 
