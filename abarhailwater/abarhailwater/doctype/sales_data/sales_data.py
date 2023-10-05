@@ -8,6 +8,11 @@ class SalesData(Document):
 	
     def on_submit(self):
         abbr = frappe.db.get_value("Company", self.company, "abbr")
+        first_item = self.details[0]
+        doctype = first_item.get("doctype")
+        fieldnames = frappe.get_meta(doctype).get_valid_columns()
+        product_names = fieldnames[26:40]
+        
         for d in self.details:
             args = frappe._dict(
                 {
@@ -21,10 +26,6 @@ class SalesData(Document):
                     "sales_data": self.name,
                 }
             )
-            first_item = d[0]
-            doctype = first_item.get("doctype")
-            fieldnames = frappe.get_meta(doctype).get_valid_columns()
-            product_names = fieldnames[26:40]
             details = []
             for n in product_names:
                 if d[n] > 0 :
