@@ -8,7 +8,7 @@ class SalesData(Document):
 	
     def on_submit(self):
         abbr = frappe.db.get_value("Company", self.company, "abbr")
-        for d in self.sales_data:
+        for d in self.details:
             args = frappe._dict(
                 {
                     "doctype": "Sales Invoice",
