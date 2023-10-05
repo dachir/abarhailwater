@@ -6,10 +6,10 @@ from frappe.model.document import Document
 
 class SalesData(Document):
 	
-	def on_submit(self):
+    def on_submit(self):
         abbr = frappe.db.get_value("Company", self.company, "abbr")
-		for d in self.sales_data:
-			args = frappe._dict(
+        for d in self.sales_data:
+            args = frappe._dict(
                 {
                     "doctype": "Sales Invoice",
                     "company": self.company,
@@ -18,9 +18,10 @@ class SalesData(Document):
                     "branch": self.branch,
                     "set_warehouse": d.salesman + " - " + abbr,
                     "update_stock": 0, #todo 1
+                    "sales_data": self.name,
                 }
             )
-            first_item = items[0]
+            first_item = d[0]
             doctype = first_item.get("doctype")
             fieldnames = frappe.get_meta(doctype).get_valid_columns()
             product_names = fieldnames[26:40]
@@ -44,19 +45,19 @@ class SalesData(Document):
                 sale.insert()
 
     def on_cancel(self):
-		#self.ignore_linked_doctypes = "GL Entry"
+        #self.ignore_linked_doctypes = "GL Entry"
 
-		frappe.delete_doc(
-			"Sales Invoice",
-			frappe.db.sql_list(
-				"""select name from `tabSales Invoice`
-			where payroll_entry=%s """,
-				(self.name),
-			),
-		)
-		self.db_set("salary_slips_created", 0)
-		self.db_set("salary_slips_submitted", 0)
-		self.set_status(update=True, status="Cancelled")
+        frappe.delete_doc(
+            "Sales Invoice",
+            frappe.db.sql_list(
+                """select name from `tabSales Invoice`
+            where sales_data=%s """,
+                (self.name),
+            ),
+        )
+        #self.db_set("salary_slips_created", 0)
+        #self.db_set("salary_slips_submitted", 0)
+        #self.set_status(update=True, status="Cancelled")
 	
                     
 			

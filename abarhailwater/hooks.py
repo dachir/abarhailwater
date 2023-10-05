@@ -199,3 +199,9 @@ app_license = "MIT"
 # auth_hooks = [
 #	"abarhailwater.auth.validate"
 # ]
+
+fixtures = [
+    {"dt": "Custom Field", "filters": [["module", "=", "Abarhailwater"]]},
+    {"dt": "Client Script", "filters": [["enabled", "=", 1],["module", "=", "Abarhailwater"]]},
+    {"dt": "Server Script", "filters": [["disabled", "=", 0],["module", "=", "Abarhailwater"]]},
+]
