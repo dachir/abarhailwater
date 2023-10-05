@@ -12,7 +12,7 @@ class SalesData(Document):
         doctype = first_item.get("doctype")
         fieldnames = frappe.get_meta(doctype).get_valid_columns()
         product_names = fieldnames[26:40]
-        
+
         for d in self.details:
             args = frappe._dict(
                 {
@@ -28,10 +28,10 @@ class SalesData(Document):
             )
             details = []
             for n in product_names:
-                if d[n] > 0 :
+                if d.get(n) > 0 :
                     args_sub = frappe._dict({
                         "item": n, 
-                        "qty": d[n], 
+                        "qty": d.get(n), 
                     })
                     details.append(args_sub)
 
