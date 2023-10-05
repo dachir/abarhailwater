@@ -28,7 +28,7 @@ class SalesData(Document):
             )
             details = []
             for n in product_names:
-                if d.get(n) :
+                if int(d.get(n)) > 0 :
                     args_sub = frappe._dict({
                         "item": n, 
                         "qty": d.get(n), 
@@ -42,7 +42,7 @@ class SalesData(Document):
             )
 
             if details :
-                frappe.throw(str(args))
+                #frappe.throw(str(args))
                 sale = frappe.get_doc(args)
                 sale.insert()
 
