@@ -1,0 +1,234 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2023-10-05 09:26:50.846260",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "billno",
+  "billdate",
+  "salesmanbranch",
+  "route",
+  "customercode",
+  "customername",
+  "salesman",
+  "mobileno",
+  "state",
+  "district",
+  "city",
+  "street",
+  "customerclass",
+  "customeraccounttype",
+  "type",
+  "customersubclass",
+  "chiller",
+  "stand",
+  "businesstype",
+  "abar_12_x_15_ltr",
+  "abar_12_x_200_ml_shrink",
+  "abar_12_x_330_ml_shrink",
+  "abar_12_x_600_ml_shrink",
+  "abar_24_x_200_ml_shrink",
+  "abar_24_x_300_ml_shrink",
+  "abar_24_x_330_ml",
+  "abar_24_x_600_ml",
+  "abar_30_x_600_ml",
+  "abar_4_x_5_ltr",
+  "abar_40_x_250_ml",
+  "abar_40_x_330_ml",
+  "abar_48_x_200_ml",
+  "abar_6_x_15_ltr_shrink",
+  "test",
+  "total"
+ ],
+ "fields": [
+  {
+   "fieldname": "billno",
+   "fieldtype": "Data",
+   "label": "BillNo"
+  },
+  {
+   "fieldname": "billdate",
+   "fieldtype": "Date",
+   "label": "BillDate"
+  },
+  {
+   "fieldname": "salesmanbranch",
+   "fieldtype": "Data",
+   "label": "SalesmanBranch"
+  },
+  {
+   "fieldname": "route",
+   "fieldtype": "Data",
+   "label": "Route"
+  },
+  {
+   "fieldname": "customercode",
+   "fieldtype": "Data",
+   "label": "CustomerCode"
+  },
+  {
+   "fieldname": "customername",
+   "fieldtype": "Data",
+   "label": "CustomerName"
+  },
+  {
+   "fieldname": "salesman",
+   "fieldtype": "Data",
+   "label": "Salesman"
+  },
+  {
+   "fieldname": "mobileno",
+   "fieldtype": "Data",
+   "label": "MobileNo"
+  },
+  {
+   "fieldname": "state",
+   "fieldtype": "Data",
+   "label": "State"
+  },
+  {
+   "fieldname": "district",
+   "fieldtype": "Data",
+   "label": "District"
+  },
+  {
+   "fieldname": "city",
+   "fieldtype": "Data",
+   "label": "City"
+  },
+  {
+   "fieldname": "street",
+   "fieldtype": "Data",
+   "label": "Street"
+  },
+  {
+   "fieldname": "customerclass",
+   "fieldtype": "Data",
+   "label": "CustomerClass"
+  },
+  {
+   "fieldname": "customeraccounttype",
+   "fieldtype": "Data",
+   "label": "CustomerAccountType"
+  },
+  {
+   "fieldname": "type",
+   "fieldtype": "Data",
+   "label": "Type"
+  },
+  {
+   "fieldname": "customersubclass",
+   "fieldtype": "Data",
+   "label": "CustomerSubClass"
+  },
+  {
+   "fieldname": "chiller",
+   "fieldtype": "Data",
+   "label": "Chiller"
+  },
+  {
+   "fieldname": "stand",
+   "fieldtype": "Data",
+   "label": "Stand"
+  },
+  {
+   "fieldname": "businesstype",
+   "fieldtype": "Data",
+   "label": "BusinessType"
+  },
+  {
+   "fieldname": "abar_12_x_15_ltr",
+   "fieldtype": "Data",
+   "label": "ABAR 12 x 1.5 lTR"
+  },
+  {
+   "fieldname": "abar_12_x_200_ml_shrink",
+   "fieldtype": "Data",
+   "label": "ABAR 12 X 200 ML SHRINK"
+  },
+  {
+   "fieldname": "abar_12_x_330_ml_shrink",
+   "fieldtype": "Data",
+   "label": "ABAR 12 X 330 ML SHRINK"
+  },
+  {
+   "fieldname": "abar_12_x_600_ml_shrink",
+   "fieldtype": "Data",
+   "label": "ABAR 12 X 600 ML SHRINK"
+  },
+  {
+   "fieldname": "abar_24_x_200_ml_shrink",
+   "fieldtype": "Data",
+   "label": "ABAR 24 X 200 ML SHRINK"
+  },
+  {
+   "fieldname": "abar_24_x_300_ml_shrink",
+   "fieldtype": "Data",
+   "label": "ABAR 24 X 300 ML SHRINK"
+  },
+  {
+   "fieldname": "abar_24_x_330_ml",
+   "fieldtype": "Data",
+   "label": "ABAR 24 X 330 ML"
+  },
+  {
+   "fieldname": "abar_24_x_600_ml",
+   "fieldtype": "Data",
+   "label": "ABAR 24 X 600 ML"
+  },
+  {
+   "fieldname": "abar_30_x_600_ml",
+   "fieldtype": "Data",
+   "label": "ABAR 30 X 600 ml"
+  },
+  {
+   "fieldname": "abar_4_x_5_ltr",
+   "fieldtype": "Data",
+   "label": "ABAR 4 X 5 lTR"
+  },
+  {
+   "fieldname": "abar_40_x_250_ml",
+   "fieldtype": "Data",
+   "label": "ABAR 40 X 250 ml"
+  },
+  {
+   "fieldname": "abar_40_x_330_ml",
+   "fieldtype": "Data",
+   "label": "ABAR 40 X 330 ml"
+  },
+  {
+   "fieldname": "abar_48_x_200_ml",
+   "fieldtype": "Data",
+   "label": "ABAR 48 X 200 ml"
+  },
+  {
+   "fieldname": "abar_6_x_15_ltr_shrink",
+   "fieldtype": "Data",
+   "label": "ABAR 6 X 1.5 LTR SHRINK"
+  },
+  {
+   "fieldname": "test",
+   "fieldtype": "Data",
+   "label": "TEST"
+  },
+  {
+   "fieldname": "total",
+   "fieldtype": "Data",
+   "label": "Total"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2023-10-05 09:26:50.846260",
+ "modified_by": "Administrator",
+ "module": "Abarhailwater",
+ "name": "Sales Details",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
