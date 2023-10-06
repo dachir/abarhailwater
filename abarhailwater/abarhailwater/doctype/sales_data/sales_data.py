@@ -36,7 +36,7 @@ class SalesData(Document):
                         "set_warehouse": d.salesman + " - " + abbr,
                         "doctype": "Sales Invoice",
                         "docstatus": 0,
-                        "update_stock": 0, #todo 1
+                        "update_stock": 1,
                         "sales_data": self.name,
                         "items":invoice_details,
                     }
