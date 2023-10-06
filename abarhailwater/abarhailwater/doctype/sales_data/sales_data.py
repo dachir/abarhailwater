@@ -12,67 +12,44 @@ class SalesData(Document):
         doctype = first_item.get("doctype")
         fieldnames = frappe.get_meta(doctype).get_valid_columns()
         product_names = fieldnames[26:40]
+        try:
+            for d in self.details:
+                invoice_details = []
+                for n in product_names:
+                    if int(d.get(n)) > 0 :
+                        details = frappe._dict({
+                            "item_code": n.replace("_", " ").upper(),
+                            #"description": n,
+                            "qty": int(d.get(n)),
+                            #"rate": item.prix,
+                            "doctype": "Sales Invoice Item",
+                        })
+                        invoice_details.append(details)
 
-        for d in self.details:
-            #args = frappe._dict(
-            #    {
-            #        "doctype": "Sales Invoice",
-            #        "company": self.company,
-            #        "date": d.billdate,
-            #        "customer": d.customercode,
-            #        "branch": self.branch,
-            #        "set_warehouse": d.salesman + " - " + abbr,
-            #        "update_stock": 0, #todo 1
-            #        "sales_data": self.name,
-            #    }
-            #)
-            #details = []
-            invoice_details = []
-            for n in product_names:
-                if int(d.get(n)) > 0 :
-                    #args_sub = frappe._dict({
-                    #    "item": n, 
-                    #    "qty": d.get(n), 
-                    #})
-                    #details.append(args_sub)
+                args = frappe._dict(
+                    {
+                        "customer": d.customercode,
+                        "company": self.company,
+                        "posting_date": d.billdate,
+                        "currency": self.currency,
+                        "branch": self.branch,
+                        "set_warehouse": d.salesman + " - " + abbr,
+                        "doctype": "Sales Invoice",
+                        "docstatus": 0,
+                        "update_stock": 0, #todo 1
+                        "sales_data": self.name,
+                        "items":invoice_details,
+                    }
+                )
 
-                    details = frappe._dict({
-                        "item_code": n.replace("_", " ").upper(),
-                        #"description": n,
-                        "qty": int(d.get(n)),
-                        #"rate": item.prix,
-                        "doctype": "Sales Invoice Item",
-                    })
-                    invoice_details.append(details)
-
-            #args.update(
-            #    {
-            #        "details": details, 
-            #    }
-            #)
-            args = frappe._dict(
-                {
-                    "customer": d.customercode,
-                    "company": self.company,
-                    "posting_date": d.billdate,
-                    "currency": self.currency,
-                    "branch": self.branch,
-                    "set_warehouse": d.salesman + " - " + abbr,
-                    "doctype": "Sales Invoice",
-                    "docstatus": 0,
-					"update_stock": 0, #todo 1
-                    "sales_data": self.name,
-					"items":invoice_details,
-                }
-            )
-
-            if details :
-                #frappe.throw(str(args))
-                sale = frappe.get_doc(args)
-                try:
+                if details :
+                    #frappe.throw(str(args))
+                    sale = frappe.get_doc(args)
                     sale.insert()
-                except Exception as e:
-                    frappe.msgprint(str(args))
+        except Exception as e:
+            frappe.msgprint("Error: " + str(e))
+            frappe.msgprint("Data: " +str(args))
+            frappe.throw("Error occurred during Sales Invoice insertion. All records are rejected.")
 
     def on_cancel(self):
         #self.ignore_linked_doctypes = "GL Entry"
