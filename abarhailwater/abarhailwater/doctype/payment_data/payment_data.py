@@ -17,7 +17,7 @@ class PaymentData(Document):
 						"posting_date": d.receipt_date,
 						#"currency": self.currency,
 						"mode_of_payment": "Cash",
-						"paid_to": "Vehicle Cash " + self.branch,
+						"paid_to": self.paid_to,
 						"party_type": "Customer",
 						"party": d.customer_code,
 						"paid_amount":d.paid_amount,

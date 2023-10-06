@@ -11,6 +11,7 @@
   "currency",
   "column_break_dhuw1",
   "branch",
+  "paid_to",
   "amended_from",
   "section_break_ipp0f",
   "details"
@@ -59,6 +60,12 @@
    "fieldname": "details",
    "fieldtype": "Table",
    "options": "Payment Details"
+  },
+  {
+   "fieldname": "paid_to",
+   "fieldtype": "Link",
+   "label": "Account Paid To",
+   "options": "Account"
   }
  ],
  "index_web_pages_for_search": 1,
@@ -69,7 +76,7 @@
    "link_fieldname": "sales_data"
   }
  ],
- "modified": "2023-10-06 15:29:38.138628",
+ "modified": "2023-10-06 16:37:48.185821",
  "modified_by": "Administrator",
  "module": "Abarhailwater",
  "name": "Payment Data",
