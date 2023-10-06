@@ -1,7 +1,7 @@
 {
  "actions": [],
  "allow_rename": 1,
- "creation": "2023-10-05 09:31:43.528946",
+ "creation": "2023-10-06 15:22:41.674106",
  "default_view": "List",
  "doctype": "DocType",
  "editable_grid": 1,
@@ -11,46 +11,16 @@
   "currency",
   "column_break_dhuw1",
   "branch",
-  "details_section",
-  "details",
-  "amended_from"
+  "amended_from",
+  "section_break_ipp0f",
+  "details"
  ],
  "fields": [
-  {
-   "fieldname": "branch",
-   "fieldtype": "Link",
-   "label": "Branch",
-   "options": "Branch"
-  },
-  {
-   "allow_bulk_edit": 1,
-   "fieldname": "details",
-   "fieldtype": "Table",
-   "options": "Sales Details"
-  },
-  {
-   "fieldname": "amended_from",
-   "fieldtype": "Link",
-   "label": "Amended From",
-   "no_copy": 1,
-   "options": "Sales Data",
-   "print_hide": 1,
-   "read_only": 1
-  },
   {
    "fieldname": "company",
    "fieldtype": "Link",
    "label": "Company",
    "options": "Company"
-  },
-  {
-   "fieldname": "column_break_dhuw1",
-   "fieldtype": "Column Break"
-  },
-  {
-   "fieldname": "details_section",
-   "fieldtype": "Section Break",
-   "label": "Details"
   },
   {
    "fetch_from": "company.default_currency",
@@ -59,6 +29,36 @@
    "label": "Currency",
    "options": "Currency",
    "read_only": 1
+  },
+  {
+   "fieldname": "column_break_dhuw1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "branch",
+   "fieldtype": "Link",
+   "label": "Branch",
+   "options": "Branch"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Payment Data",
+   "print_hide": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_break_ipp0f",
+   "fieldtype": "Section Break",
+   "label": "Details"
+  },
+  {
+   "allow_bulk_edit": 1,
+   "fieldname": "details",
+   "fieldtype": "Table",
+   "options": "Payment Details"
   }
  ],
  "index_web_pages_for_search": 1,
@@ -69,10 +69,10 @@
    "link_fieldname": "sales_data"
   }
  ],
- "modified": "2023-10-06 15:30:30.412901",
+ "modified": "2023-10-06 15:29:38.138628",
  "modified_by": "Administrator",
  "module": "Abarhailwater",
- "name": "Sales Data",
+ "name": "Payment Data",
  "owner": "Administrator",
  "permissions": [
   {
@@ -85,7 +85,6 @@
    "report": 1,
    "role": "System Manager",
    "share": 1,
-   "submit": 1,
    "write": 1
   },
   {
