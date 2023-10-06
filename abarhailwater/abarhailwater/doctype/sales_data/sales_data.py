@@ -37,7 +37,7 @@ class SalesData(Document):
                     #details.append(args_sub)
 
                     details = frappe._dict({
-                        "item_code": n,
+                        "item_code": n.replace("_", " ").upper(),
                         #"description": n,
                         "qty": int(d.get(n)),
                         #"rate": item.prix,
