@@ -72,11 +72,11 @@
  "is_submittable": 1,
  "links": [
   {
-   "link_doctype": "Sales Invoice",
-   "link_fieldname": "sales_data"
+   "link_doctype": "Payment Entry",
+   "link_fieldname": "payment_data"
   }
  ],
- "modified": "2023-10-06 16:37:48.185821",
+ "modified": "2023-10-06 17:20:16.099068",
  "modified_by": "Administrator",
  "module": "Abarhailwater",
  "name": "Payment Data",
