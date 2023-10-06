@@ -18,7 +18,7 @@ class SalesData(Document):
                 for n in product_names:
                     if int(d.get(n)) > 0 :
                         details = frappe._dict({
-                            "item_code": n.replace("_", " ").upper(),
+                            "item_code": frappe.get_meta(doctype).get_label(n), 
                             #"description": n,
                             "qty": int(d.get(n)),
                             #"rate": item.prix,
