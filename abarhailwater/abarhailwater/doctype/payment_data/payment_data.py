@@ -21,6 +21,7 @@ class PaymentData(Document):
 						"party_type": "Customer",
 						"party": d.customer_code,
 						"paid_amount":d.paid_amount,
+						"received_amount":d.paid_amount,
 						"branch":self.branch,
 						"reference_no": d.receipt_no,
 						"reference_date": d.receipt_date,
