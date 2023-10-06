@@ -14,30 +14,55 @@ class SalesData(Document):
         product_names = fieldnames[26:40]
 
         for d in self.details:
-            args = frappe._dict(
-                {
-                    "doctype": "Sales Invoice",
-                    "company": self.company,
-                    "date": d.billdate,
-                    "customer": d.customercode,
-                    "branch": self.branch,
-                    "set_warehouse": d.salesman + " - " + abbr,
-                    "update_stock": 0, #todo 1
-                    "sales_data": self.name,
-                }
-            )
-            details = []
+            #args = frappe._dict(
+            #    {
+            #        "doctype": "Sales Invoice",
+            #        "company": self.company,
+            #        "date": d.billdate,
+            #        "customer": d.customercode,
+            #        "branch": self.branch,
+            #        "set_warehouse": d.salesman + " - " + abbr,
+            #        "update_stock": 0, #todo 1
+            #        "sales_data": self.name,
+            #    }
+            #)
+            #details = []
+            invoice_details = []
             for n in product_names:
                 if int(d.get(n)) > 0 :
-                    args_sub = frappe._dict({
-                        "item": n, 
-                        "qty": d.get(n), 
-                    })
-                    details.append(args_sub)
+                    #args_sub = frappe._dict({
+                    #    "item": n, 
+                    #    "qty": d.get(n), 
+                    #})
+                    #details.append(args_sub)
 
-            args.update(
+                    details = frappe._dict({
+                        "item_code": n,
+                        #"description": n,
+                        "qty": int(d.get(n)),
+                        #"rate": item.prix,
+                        "doctype": "Sales Invoice Item",
+                    })
+                    invoice_details.append(details)
+
+            #args.update(
+            #    {
+            #        "details": details, 
+            #    }
+            #)
+            args = frappe._dict(
                 {
-                    "details": details, 
+                    "customer": d.customercode,
+                    "company": self.company,
+                    "posting_date": d.billdate,
+                    "currency": self.currency,
+                    "branch": self.branch,
+                    "set_warehouse": d.salesman + " - " + abbr,
+                    "doctype": "Sales Invoice",
+                    "docstatus": 0,
+					"update_stock": 0, #todo 1
+                    "sales_data": self.name,
+					"items":invoice_details,
                 }
             )
 

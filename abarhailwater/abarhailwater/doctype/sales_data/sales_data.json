@@ -8,6 +8,7 @@
  "engine": "InnoDB",
  "field_order": [
   "company",
+  "currency",
   "column_break_dhuw1",
   "branch",
   "details_section",
@@ -50,12 +51,20 @@
    "fieldname": "details_section",
    "fieldtype": "Section Break",
    "label": "Details"
+  },
+  {
+   "fetch_from": "company.default_currency",
+   "fieldname": "currency",
+   "fieldtype": "Link",
+   "label": "Currency",
+   "options": "Currency",
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2023-10-05 18:40:44.037453",
+ "modified": "2023-10-06 09:48:50.041054",
  "modified_by": "Administrator",
  "module": "Abarhailwater",
  "name": "Sales Data",
