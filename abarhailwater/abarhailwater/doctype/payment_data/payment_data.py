@@ -14,7 +14,7 @@ class PaymentData(Document):
 						"doctype": "Payment Entry",
 						"payment_type": "Receive",
 						"company": self.company,
-						"posting_date": d.receipt_date,
+						"posting_date": frappe.utils.getdate(d.receipt_date),
 						#"currency": self.currency,
 						"mode_of_payment": "Cash",
 						"paid_to": self.paid_to,
@@ -24,7 +24,7 @@ class PaymentData(Document):
 						"received_amount":d.paid_amount,
 						"branch":self.branch,
 						"reference_no": d.receipt_no,
-						"reference_date": d.receipt_date,
+						"reference_date": frappe.utils.getdate(d.receipt_date),
 						"payment_data": self.name,
 					}
 				)
