@@ -44,7 +44,10 @@ class SalesData(Document):
             if details :
                 #frappe.throw(str(args))
                 sale = frappe.get_doc(args)
-                sale.insert()
+                try:
+                    sale.insert()
+                except Exception as e:
+                    frappe.msgprint(str(args))
 
     def on_cancel(self):
         #self.ignore_linked_doctypes = "GL Entry"
