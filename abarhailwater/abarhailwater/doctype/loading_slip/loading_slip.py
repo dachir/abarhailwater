@@ -1,7 +1,7 @@
 # Copyright (c) 2023, Kossivi and contributors
 # For license information, please see license.txt
 
-# import frappe
+import frappe
 from frappe.model.document import Document
 
 class LoadingSlip(Document):
@@ -11,7 +11,7 @@ class LoadingSlip(Document):
         first_item = self.details[0]
         doctype = first_item.get("doctype")
         fieldnames = frappe.get_meta(doctype).get_valid_columns()
-        product_names = fieldnames[4:16]
+        product_names = fieldnames[10:24]
         try:
             for d in self.details:
                 loading_details = []
