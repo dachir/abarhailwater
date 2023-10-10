@@ -27,7 +27,7 @@ class LoadingSlip(Document):
 
                 args = frappe._dict(
                     {
-                        "stock_entry_type": d.customercode,
+                        "stock_entry_type": "Material Transfer",
                         "company": self.company,
                         "posting_date": d.billdate,
                         "from_warehouse": self.source_warehouse,
