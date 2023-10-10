@@ -18,6 +18,7 @@ class LoadingSlip(Document):
                 for n in product_names:
                     if int(d.get(n)) > 0 :
                         details = frappe._dict({
+                            "s_warehouse": self.source_warehouse,
                             "t_warehouse": d.salesman + " - " + abbr,
                             "item_code": frappe.get_meta(doctype).get_label(n), 
                             "qty": int(d.get(n)),
