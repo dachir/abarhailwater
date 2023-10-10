@@ -56,7 +56,7 @@ class LoadingSlip(Document):
             "Stock Entry",
             frappe.db.sql_list(
                 """select name from `tabStock Entry`
-            where sales_data=%s """,
+            where loading_slip=%s """,
                 (self.name),
             ),
         )
