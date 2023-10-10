@@ -1,0 +1,133 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2023-10-10 09:32:50.735690",
+ "default_view": "List",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "slipno",
+  "slipdate",
+  "salesman",
+  "abar_12_x_15_ltr",
+  "abar_12_x_200_ml_shrink",
+  "abar_12_x_330_ml_shrink",
+  "abar_12_x_600_ml_shrink",
+  "abar_24_x_200_ml_shrink",
+  "abar_24_x_300_ml_shrink",
+  "abar_24_x_330_ml",
+  "abar_24_x_600_ml",
+  "abar_30_x_600_ml",
+  "abar_4_x_5_ltr",
+  "abar_40_x_250_ml",
+  "abar_40_x_330_ml",
+  "abar_48_x_200_ml",
+  "abar_6_x_15_ltr_shrink",
+  "total"
+ ],
+ "fields": [
+  {
+   "fieldname": "slipno",
+   "fieldtype": "Data",
+   "label": "LoadingSlipNo"
+  },
+  {
+   "fieldname": "slipdate",
+   "fieldtype": "Date",
+   "label": "SlipDate"
+  },
+  {
+   "fieldname": "salesman",
+   "fieldtype": "Data",
+   "label": "Salesman"
+  },
+  {
+   "fieldname": "abar_12_x_15_ltr",
+   "fieldtype": "Data",
+   "label": "ABAR 12 x 1.5 lTR"
+  },
+  {
+   "fieldname": "abar_12_x_200_ml_shrink",
+   "fieldtype": "Data",
+   "label": "ABAR 12 X 200 ML SHRINK"
+  },
+  {
+   "fieldname": "abar_12_x_330_ml_shrink",
+   "fieldtype": "Data",
+   "label": "ABAR 12 X 330 ML SHRINK"
+  },
+  {
+   "fieldname": "abar_12_x_600_ml_shrink",
+   "fieldtype": "Data",
+   "label": "ABAR 12 X 600 ML SHRINK"
+  },
+  {
+   "fieldname": "abar_24_x_200_ml_shrink",
+   "fieldtype": "Data",
+   "label": "ABAR 24 X 200 ML SHRINK"
+  },
+  {
+   "fieldname": "abar_24_x_300_ml_shrink",
+   "fieldtype": "Data",
+   "label": "ABAR 24 X 300 ML SHRINK"
+  },
+  {
+   "fieldname": "abar_24_x_330_ml",
+   "fieldtype": "Data",
+   "label": "ABAR 24 X 330 ML"
+  },
+  {
+   "fieldname": "abar_24_x_600_ml",
+   "fieldtype": "Data",
+   "label": "ABAR 24 X 600 ML"
+  },
+  {
+   "fieldname": "abar_30_x_600_ml",
+   "fieldtype": "Data",
+   "label": "ABAR 30 X 600 ml"
+  },
+  {
+   "fieldname": "abar_4_x_5_ltr",
+   "fieldtype": "Data",
+   "label": "ABAR 4 X 5 lTR"
+  },
+  {
+   "fieldname": "abar_40_x_250_ml",
+   "fieldtype": "Data",
+   "label": "ABAR 40 X 250 ml"
+  },
+  {
+   "fieldname": "abar_40_x_330_ml",
+   "fieldtype": "Data",
+   "label": "ABAR 40 X 330 ml"
+  },
+  {
+   "fieldname": "abar_48_x_200_ml",
+   "fieldtype": "Data",
+   "label": "ABAR 48 X 200 ml"
+  },
+  {
+   "fieldname": "abar_6_x_15_ltr_shrink",
+   "fieldtype": "Data",
+   "label": "ABAR 6 X 1.5 LTR SHRINK"
+  },
+  {
+   "fieldname": "total",
+   "fieldtype": "Data",
+   "label": "Total"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2023-10-10 09:32:50.735690",
+ "modified_by": "Administrator",
+ "module": "Abarhailwater",
+ "name": "Loadind Details",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
