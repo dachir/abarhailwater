@@ -30,6 +30,7 @@ class SalesData(Document):
                     {
                         "customer": d.customercode,
                         "company": self.company,
+                        "set_posting_time" : 1,
                         "posting_date": d.billdate,
                         "currency": self.currency,
                         "branch": self.branch,

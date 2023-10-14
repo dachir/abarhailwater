@@ -30,6 +30,7 @@ class LoadingSlip(Document):
                     {
                         "stock_entry_type": "Material Transfer",
                         "company": self.company,
+                        "set_posting_time" : 1,
                         "posting_date": d.slipdate,
                         "from_warehouse": self.source_warehouse,
                         "branch": self.branch,
