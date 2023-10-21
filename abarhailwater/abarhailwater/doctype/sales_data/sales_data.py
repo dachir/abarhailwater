@@ -51,13 +51,13 @@ class SalesData(Document):
                         #"rate": item.prix,
                         "doctype": "Sales Taxes and Charges",
                     })
-                    args.update({"taxes": tax})
+                    args.update({"taxes": [tax]})
                     sale = frappe.get_doc(args)
                     sale.insert()
         except Exception as e:
             #frappe.msgprint("Error: " + str(e))
             #frappe.msgprint("Data: " +str(args))
-            frappe.msgprint("Error: " + str(e) + "\n" + "Data: " +str(args) + "\n" + "Error occurred during Sales Invoice insertion. All records are rejected.")
+            frappe.throw("Error: " + str(e) + "\n" + "Data: " +str(args) + "\n" + "Error occurred during Sales Invoice insertion. All records are rejected.")
 
     def on_cancel(self):
         #self.ignore_linked_doctypes = "GL Entry"
