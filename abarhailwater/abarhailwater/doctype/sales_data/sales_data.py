@@ -44,7 +44,14 @@ class SalesData(Document):
                 )
 
                 if details :
-                    #frappe.throw(str(args))
+                    tax = frappe._dict({
+                        "charge_type": "On Net Total", 
+                        "account_head": "VAT 15% - AHW",
+                        #"qty": int(d.get(n)),
+                        #"rate": item.prix,
+                        "doctype": "Sales Taxes and Charges",
+                    })
+                    args.update({"taxes": tax})
                     sale = frappe.get_doc(args)
                     sale.insert()
         except Exception as e:
