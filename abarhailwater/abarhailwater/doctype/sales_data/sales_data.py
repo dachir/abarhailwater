@@ -3,6 +3,7 @@
 
 import frappe
 from frappe.model.document import Document
+import traceback
 
 class SalesData(Document):
 	
@@ -47,6 +48,7 @@ class SalesData(Document):
                     tax = frappe._dict({
                         "charge_type": "On Net Total", 
                         "account_head": "VAT 15% - AHW",
+                        "description": "VAT 15% @ 15.0",
                         #"qty": int(d.get(n)),
                         #"rate": item.prix,
                         "doctype": "Sales Taxes and Charges",
