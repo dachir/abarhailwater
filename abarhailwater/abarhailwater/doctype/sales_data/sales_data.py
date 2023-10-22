@@ -49,8 +49,7 @@ class SalesData(Document):
                         "charge_type": "On Net Total", 
                         "account_head": "VAT 15% - AHW",
                         "description": "VAT 15% @ 15.0",
-                        #"qty": int(d.get(n)),
-                        #"rate": item.prix,
+                        "rate": 15.0,
                         "doctype": "Sales Taxes and Charges",
                     })
                     args.update({"taxes": [tax]})
