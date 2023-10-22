@@ -55,9 +55,12 @@ class SalesData(Document):
                     sale = frappe.get_doc(args)
                     sale.insert()
         except Exception as e:
-            #frappe.msgprint("Error: " + str(e))
-            #frappe.msgprint("Data: " +str(args))
-            frappe.throw("Error: " + str(e) + "\n" + "Data: " +str(args) + "\n" + "Error occurred during Sales Invoice insertion. All records are rejected.")
+            # Get the full traceback
+            full_traceback = traceback.format_exc()
+
+            # Display the full traceback
+            error_message = "Error: " + str(e) + "\n" + "Data: " + str(args) + "\n" + "Error occurred during Sales Invoice insertion. All records are rejected." + "\n" + full_traceback
+            frappe.throw(error_message)
 
     def on_cancel(self):
         #self.ignore_linked_doctypes = "GL Entry"
