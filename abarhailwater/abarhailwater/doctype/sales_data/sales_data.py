@@ -87,6 +87,7 @@ class SalesData(Document):
                     args.update({"taxes": [tax]})
                     sale = frappe.get_doc(args)
                     sale.insert()
+                    sale.submit()
                     
             except Exception as e:
                 # Add the failed record to the list
