@@ -1,0 +1,103 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2023-11-08 12:33:42.231956",
+ "default_view": "List",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "custno",
+  "customername",
+  "saletype",
+  "erpprodcode",
+  "productname",
+  "quantity",
+  "grossamount",
+  "taxamount",
+  "totalamount",
+  "billdate",
+  "refbillno",
+  "erpcustcode",
+  "employeeno"
+ ],
+ "fields": [
+  {
+   "fieldname": "custno",
+   "fieldtype": "Data",
+   "label": "CustNo"
+  },
+  {
+   "fieldname": "customername",
+   "fieldtype": "Data",
+   "label": "CustomerName"
+  },
+  {
+   "fieldname": "saletype",
+   "fieldtype": "Data",
+   "label": "SaleType"
+  },
+  {
+   "fieldname": "erpprodcode",
+   "fieldtype": "Data",
+   "label": "ERPProdCode"
+  },
+  {
+   "fieldname": "productname",
+   "fieldtype": "Data",
+   "label": "ProductName"
+  },
+  {
+   "fieldname": "quantity",
+   "fieldtype": "Data",
+   "label": "Quantity"
+  },
+  {
+   "fieldname": "grossamount",
+   "fieldtype": "Data",
+   "label": "GrossAmount"
+  },
+  {
+   "fieldname": "taxamount",
+   "fieldtype": "Data",
+   "label": "TaxAmount"
+  },
+  {
+   "fieldname": "totalamount",
+   "fieldtype": "Data",
+   "label": "TotalAmount"
+  },
+  {
+   "fieldname": "billdate",
+   "fieldtype": "Data",
+   "label": "Billdate"
+  },
+  {
+   "fieldname": "refbillno",
+   "fieldtype": "Data",
+   "label": "RefBillNo"
+  },
+  {
+   "fieldname": "erpcustcode",
+   "fieldtype": "Data",
+   "label": "ERPCustCode"
+  },
+  {
+   "fieldname": "employeeno",
+   "fieldtype": "Data",
+   "label": "EmployeeNo"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2023-11-08 12:33:42.231956",
+ "modified_by": "Administrator",
+ "module": "Abarhailwater",
+ "name": "Sales Details 2",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

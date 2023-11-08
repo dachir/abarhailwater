@@ -32,7 +32,7 @@ class SalesData(Document):
                         item_code = frappe.get_meta(doctype).get_label(n)
                         batches = frappe.db.get_list("Batch", fields=["name", "batch_qty"], filters={"item":item_code, "batch_qty": [">",0]}, order_by="batch_qty desc")
                         for b in batches:
-                            if b.batch_qty > max_qty:
+                            if b.batch_qty >= max_qty:
                                 details = frappe._dict({
                                     "item_code": item_code,
                                     "qty": max_qty,
