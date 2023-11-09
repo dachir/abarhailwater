@@ -17,136 +17,145 @@ class SalesData2(Document):
 		last_billdate = ''	
 		last_customername = ''
 		invoice_details = []
-		try:
-			for d in self.details:
-				
-				if last_num != d.custno:
-					if invoice_details:
-						customer_names = last_customername.split()
-						code = last_customername
-						if customer_names[0].isnumeric():
-							code = customer_names[0]
-							
-							args = frappe._dict(
-								{
-									"customer": code,
-									"company": self.company,
-									"set_posting_time": 1,
-									"posting_date": last_billdate,
-									"currency": self.currency,
-									"branch": self.branch,
-									#"set_warehouse": last_customername + " - " + abbr,
-									"doctype": "Sales Invoice",
-									"docstatus": 0,
-									"update_stock": 1,
-									"sales_data": self.name,
-									"items": invoice_details,
-								}
-							)
-						else:
-							args = frappe._dict(
-								{
-									"customer": code,
-									"company": self.company,
-									"set_posting_time": 1,
-									"posting_date": last_billdate,
-									"currency": self.currency,
-									"branch": self.branch,
-									"set_warehouse": last_customername + " - " + abbr,
-									"doctype": "Sales Invoice",
-									"docstatus": 0,
-									"update_stock": 1,
-									"sales_data": self.name,
-									"items": invoice_details,
-								}
-							)
+		
+		for d in self.details:
+			
+			if last_num != d.custno:
+				if invoice_details:
+					customer_names = last_customername.split()
+					code = last_customername
+					if customer_names[0].isnumeric():
+						code = customer_names[0]
+						
+						args = frappe._dict(
+							{
+								"customer": code,
+								"company": self.company,
+								"set_posting_time": 1,
+								"posting_date": last_billdate,
+								"currency": self.currency,
+								"branch": self.branch,
+								#"set_warehouse": last_customername + " - " + abbr,
+								"doctype": "Sales Invoice",
+								"docstatus": 0,
+								"update_stock": 1,
+								"sales_data": self.name,
+								"items": invoice_details,
+							}
+						)
+					else:
+						args = frappe._dict(
+							{
+								"customer": code,
+								"company": self.company,
+								"set_posting_time": 1,
+								"posting_date": last_billdate,
+								"currency": self.currency,
+								"branch": self.branch,
+								"set_warehouse": last_customername + " - " + abbr,
+								"doctype": "Sales Invoice",
+								"docstatus": 0,
+								"update_stock": 1,
+								"sales_data": self.name,
+								"items": invoice_details,
+							}
+						)
 
-						tax = frappe._dict({
-							"charge_type": "On Net Total",
-							"account_head": "VAT 15% - AHW",
-							"description": "VAT 15% @ 15.0",
-							"rate": 15.0,
-							"doctype": "Sales Taxes and Charges",
-						})
-						args.update({"taxes": [tax]})
-						sale = frappe.get_doc(args)
+					tax = frappe._dict({
+						"charge_type": "On Net Total",
+						"account_head": "VAT 15% - AHW",
+						"description": "VAT 15% @ 15.0",
+						"rate": 15.0,
+						"doctype": "Sales Taxes and Charges",
+					})
+					args.update({"taxes": [tax]})
+					sale = frappe.get_doc(args)
+					try:
 						sale.insert()
 						sale.submit()
-					invoice_details = []
-					
-				last_num = d.custno	
-				last_billdate = d.billdate	
-				last_customername = d.customername
+					except Exception as e:
+						# Add the failed record to the list
+						failed_records.append(args)
+						frappe.msgprint(last_num)
 
-				max_qty = int(d.quantity)
-				batches = frappe.db.get_list("Batch", fields=["name", "batch_qty"], filters={"item":d.productname, "batch_qty": [">",0]}, order_by="batch_qty desc")
+						# Send the error to log
+						frappe.log_error(e)
+
+				invoice_details = []
 				
-				for b in batches:
-					if b.batch_qty >= max_qty:
-						details = frappe._dict({
-							"item_code": d.productname,
-							"qty": max_qty,
-							"doctype": "Sales Invoice Item",
-						})
-						invoice_details.append(details)
-						max_qty = 0
-						break
-					else:
-						details = frappe._dict({
-							"item_code": d.productname,
-							"qty": b.batch_qty,
-							"doctype": "Sales Invoice Item",
-						})
-						invoice_details.append(details)
-						max_qty = max_qty - b.batch_qty
+			last_num = d.custno	
+			last_billdate = d.billdate	
+			last_customername = d.customername
 
-				if max_qty > 0:
+			max_qty = int(d.quantity)
+			batches = frappe.db.get_list("Batch", fields=["name", "batch_qty"], filters={"item":d.productname, "batch_qty": [">",0]}, order_by="batch_qty desc")
+			
+			for b in batches:
+				if b.batch_qty >= max_qty:
 					details = frappe._dict({
 						"item_code": d.productname,
 						"qty": max_qty,
 						"doctype": "Sales Invoice Item",
 					})
 					invoice_details.append(details)
+					max_qty = 0
+					break
+				else:
+					details = frappe._dict({
+						"item_code": d.productname,
+						"qty": b.batch_qty,
+						"doctype": "Sales Invoice Item",
+					})
+					invoice_details.append(details)
+					max_qty = max_qty - b.batch_qty
 
-			if invoice_details:
-				customer_names = last_customername.split()
-				code = last_customername
-				if customer_names[0].isnumeric():
-					code = customer_names[0]
-					
-				args = frappe._dict(
-					{
-						"customer": code,
-						"company": self.company,
-						"set_posting_time": 1,
-						"posting_date": last_billdate,
-						"currency": self.currency,
-						"branch": self.branch,
-						"set_warehouse": last_customername + " - " + abbr,
-						"doctype": "Sales Invoice",
-						"docstatus": 0,
-						"update_stock": 1,
-						"sales_data": self.name,
-						"items": invoice_details,
-					}
-				)
-
-				tax = frappe._dict({
-					"charge_type": "On Net Total",
-					"account_head": "VAT 15% - AHW",
-					"description": "VAT 15% @ 15.0",
-					"rate": 15.0,
-					"doctype": "Sales Taxes and Charges",
+			if max_qty > 0:
+				details = frappe._dict({
+					"item_code": d.productname,
+					"qty": max_qty,
+					"doctype": "Sales Invoice Item",
 				})
-				args.update({"taxes": [tax]})
-				sale = frappe.get_doc(args)
+				invoice_details.append(details)
+
+		if invoice_details:
+			customer_names = last_customername.split()
+			code = last_customername
+			if customer_names[0].isnumeric():
+				code = customer_names[0]
+				
+			args = frappe._dict(
+				{
+					"customer": code,
+					"company": self.company,
+					"set_posting_time": 1,
+					"posting_date": last_billdate,
+					"currency": self.currency,
+					"branch": self.branch,
+					"set_warehouse": last_customername + " - " + abbr,
+					"doctype": "Sales Invoice",
+					"docstatus": 0,
+					"update_stock": 1,
+					"sales_data": self.name,
+					"items": invoice_details,
+				}
+			)
+
+			tax = frappe._dict({
+				"charge_type": "On Net Total",
+				"account_head": "VAT 15% - AHW",
+				"description": "VAT 15% @ 15.0",
+				"rate": 15.0,
+				"doctype": "Sales Taxes and Charges",
+			})
+			args.update({"taxes": [tax]})
+			sale = frappe.get_doc(args)
+			try:
 				sale.insert()
 				sale.submit()
+			except Exception as e:
+				# Add the failed record to the list
+				failed_records.append(args)
+				frappe.msgprint(last_num)
 
-		except Exception as e:
-			# Add the failed record to the list
-			failed_records.append(args)
-			frappe.msgprint(last_num)
-
-			# Send the error to log
-			frappe.log_error(e)
+				# Send the error to log
+				frappe.log_error(e)
