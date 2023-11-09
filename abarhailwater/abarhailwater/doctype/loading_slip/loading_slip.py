@@ -19,14 +19,41 @@ class LoadingSlip(Document):
                 for n in product_names:
                     if(d.get(n)):
                         if int(d.get(n)) > 0 :
-                            details = frappe._dict({
-                                "s_warehouse": self.source_warehouse,
-                                "t_warehouse": d.salesman + " - " + abbr,
-                                "item_code": frappe.get_meta(doctype).get_label(n), 
-                                "qty": int(d.get(n)),
-                                "doctype": "Stock Entry Detail",
-                            })
-                            loading_details.append(details)
+                            max_qty = int(d.get(n))
+                            item_code = frappe.get_meta(doctype).get_label(n)
+                            batches = frappe.db.get_list("Batch", fields=["name", "batch_qty"], filters={"item":item_code, "batch_qty": [">",0]}, order_by="batch_qty desc")
+                            for b in batches:
+                                if b.batch_qty >= max_qty:
+                                    details = frappe._dict({
+                                        "s_warehouse": self.source_warehouse,
+                                        "t_warehouse": d.salesman + " - " + abbr,
+                                        "item_code": item_code, 
+                                        "qty": max_qty,
+                                        "doctype": "Stock Entry Detail",
+                                    })
+                                    loading_details.append(details)
+                                    max_qty = 0
+                                    break
+                                else:
+                                    details = frappe._dict({
+                                        "s_warehouse": self.source_warehouse,
+                                        "t_warehouse": d.salesman + " - " + abbr,
+                                        "item_code": item_code, 
+                                        "qty": b.batch_qty,
+                                        "doctype": "Stock Entry Detail",
+                                    })
+                                    loading_details.append(details)
+                                    max_qty = max_qty - b.batch_qty
+
+                            if max_qty > 0:
+                                details = frappe._dict({
+                                    "s_warehouse": self.source_warehouse,
+                                    "t_warehouse": d.salesman + " - " + abbr,
+                                    "item_code": item_code, 
+                                    "qty": max_qty,
+                                    "doctype": "Stock Entry Detail",
+                                })
+                                loading_details.append(details)
 
                 args = frappe._dict(
                     {
@@ -44,12 +71,10 @@ class LoadingSlip(Document):
                 )
 
                 if details :
-                    #frappe.throw(str(args))
                     sale = frappe.get_doc(args)
                     sale.insert()
+                    sale.submit()
         except Exception as e:
-            #frappe.msgprint("Error: " + str(e))
-            #frappe.msgprint("Data: " +str(args))
             frappe.throw("Error: " + str(e) + "\n" + "Data: " +str(args) + "\n" + "Error occurred during Stock Entry insertion. All records are rejected.")
 
     def on_cancel(self):
