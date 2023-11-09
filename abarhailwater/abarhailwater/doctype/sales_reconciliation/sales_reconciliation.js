@@ -21,7 +21,6 @@ frappe.ui.form.on('Sales Reconciliation Items', {
 			row.sales = row.initial_stock;
 		}
         frm.refresh_field('final_stock');
-        //frm.refresh_field('total');
-        //frm.refresh();
+        frm.refresh();
     },
 });
