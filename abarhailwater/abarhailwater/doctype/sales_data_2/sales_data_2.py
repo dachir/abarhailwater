@@ -131,7 +131,7 @@ class SalesData2(Document):
 					"posting_date": last_billdate,
 					"currency": self.currency,
 					"branch": self.branch,
-					"set_warehouse": self.self.warehouse,
+					"set_warehouse": self.warehouse,
 					"doctype": "Sales Invoice",
 					"docstatus": 0,
 					"update_stock": 1,

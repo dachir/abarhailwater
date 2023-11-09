@@ -1,0 +1,53 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2023-11-09 16:43:11.490542",
+ "default_view": "List",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "item",
+  "initial_stock",
+  "final_stock",
+  "sales"
+ ],
+ "fields": [
+  {
+   "fieldname": "initial_stock",
+   "fieldtype": "Float",
+   "label": "Initial Stock",
+   "read_only": 1
+  },
+  {
+   "fieldname": "final_stock",
+   "fieldtype": "Float",
+   "label": "Final Stock"
+  },
+  {
+   "fieldname": "sales",
+   "fieldtype": "Float",
+   "label": "Sales",
+   "read_only": 1
+  },
+  {
+   "fieldname": "item",
+   "fieldtype": "Link",
+   "label": "Item",
+   "options": "Item",
+   "read_only": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2023-11-09 16:46:11.234562",
+ "modified_by": "Administrator",
+ "module": "Abarhailwater",
+ "name": "Sales Reconciliation Items",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
