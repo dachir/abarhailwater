@@ -12,6 +12,7 @@ class LoadingSlip(Document):
         doctype = first_item.get("doctype")
         fieldnames = frappe.get_meta(doctype).get_valid_columns()
         product_names = fieldnames[10:24]
+        args = {}
         try:
             for d in self.details:
                 loading_details = []
