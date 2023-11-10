@@ -24,6 +24,9 @@
   "abar_40_x_330_ml",
   "abar_48_x_200_ml",
   "abar_6_x_15_ltr_shrink",
+  "abar_4_gallon",
+  "5_gallon_water",
+  "empty_bottle_5_gallon",
   "total"
  ],
  "fields": [
@@ -116,12 +119,27 @@
    "fieldname": "total",
    "fieldtype": "Data",
    "label": "Total"
+  },
+  {
+   "fieldname": "abar_4_gallon",
+   "fieldtype": "Data",
+   "label": "ABAR 4 GALLON"
+  },
+  {
+   "fieldname": "5_gallon_water",
+   "fieldtype": "Data",
+   "label": "5 GALLON WATER"
+  },
+  {
+   "fieldname": "empty_bottle_5_gallon",
+   "fieldtype": "Data",
+   "label": "EMPTY BOTTLE 5 GALLON"
   }
  ],
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2023-10-10 12:51:28.902327",
+ "modified": "2023-11-10 09:25:13.676015",
  "modified_by": "Administrator",
  "module": "Abarhailwater",
  "name": "Loadind Details",

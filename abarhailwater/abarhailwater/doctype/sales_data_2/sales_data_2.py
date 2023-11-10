@@ -97,6 +97,7 @@ class SalesData2(Document):
 					details = frappe._dict({
 						"item_code": d.productname,
 						"qty": max_qty,
+						"rate" : d.grossamount / int(d.quantity),
 						"doctype": "Sales Invoice Item",
 					})
 					invoice_details.append(details)
@@ -106,6 +107,7 @@ class SalesData2(Document):
 					details = frappe._dict({
 						"item_code": d.productname,
 						"qty": b.batch_qty,
+						"rate" : d.grossamount / int(d.quantity),
 						"doctype": "Sales Invoice Item",
 					})
 					invoice_details.append(details)
@@ -115,6 +117,7 @@ class SalesData2(Document):
 				details = frappe._dict({
 					"item_code": d.productname,
 					"qty": max_qty,
+					"rate" : d.grossamount / int(d.quantity),
 					"doctype": "Sales Invoice Item",
 				})
 				invoice_details.append(details)
