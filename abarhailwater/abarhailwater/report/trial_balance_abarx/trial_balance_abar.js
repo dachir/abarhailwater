@@ -19,6 +19,7 @@ frappe.require("assets/erpnext/js/financial_statements.js", function() {
 				"options": "Branch",
 				"reqd": 1
 			},
+			
 			{
 				"fieldname": "fiscal_year",
 				"label": __("Fiscal Year"),
