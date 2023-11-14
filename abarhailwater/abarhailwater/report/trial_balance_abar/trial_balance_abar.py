@@ -35,6 +35,8 @@ def execute(filters=None):
 
 
 def validate_filters(filters):
+	if not filters.branch:
+		frappe.throw(_("Branch is required"))
 	if not filters.fiscal_year:
 		frappe.throw(_("Fiscal Year {0} is required").format(filters.fiscal_year))
 

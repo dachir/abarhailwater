@@ -13,13 +13,6 @@ frappe.require("assets/erpnext/js/financial_statements.js", function() {
 				"reqd": 1
 			},
 			{
-				"fieldname": "branch",
-				"label": __("Branch"),
-				"fieldtype": "Link",
-				"options": "Branch",
-				"reqd": 1
-			},
-			{
 				"fieldname": "fiscal_year",
 				"label": __("Fiscal Year"),
 				"fieldtype": "Link",
@@ -115,5 +108,5 @@ frappe.require("assets/erpnext/js/financial_statements.js", function() {
 		"initial_depth": 3
 	}
 
-	erpnext.utils.add_dimensions('Trial Balance', 6);
+	erpnext.utils.add_dimensions('Trial Balance Abar', 6);
 });
