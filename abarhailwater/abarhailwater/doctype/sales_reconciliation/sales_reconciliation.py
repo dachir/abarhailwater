@@ -12,6 +12,9 @@ class SalesReconciliation(Document):
 			
 		invoice_details = []
 		for i in self.items:
+			if i.sales == 0:
+				continue
+				
 			max_qty = i.sales
 			batches = frappe.db.get_list("Batch", fields=["name", "batch_qty"], filters={"item":i.item, "batch_qty": [">",0]}, order_by="batch_qty desc")
 			for b in batches:
