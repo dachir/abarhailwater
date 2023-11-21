@@ -94,10 +94,10 @@
   {
    "custom": 1,
    "link_doctype": "Sales Invoice",
-   "link_fieldname": "sales_data"
+   "link_fieldname": "sales_reconciliation"
   }
  ],
- "modified": "2023-11-09 17:50:00.437370",
+ "modified": "2023-11-21 17:24:19.627195",
  "modified_by": "Administrator",
  "module": "Abarhailwater",
  "name": "Sales Reconciliation",

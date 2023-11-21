@@ -5,7 +5,10 @@ frappe.ui.form.on('Sales Reconciliation', {
 	refresh: function(frm) {
 		frm.add_custom_button(__("Get Stock"), function() {
 			frm.call('get_items');
-		});
+		},"Utilities");
+		frm.add_custom_button(__("Generate Invoice"), function() {
+			frm.call('generate_invoice');
+		},"Utilities");
 	}
 });
 

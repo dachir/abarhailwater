@@ -6,9 +6,10 @@ from frappe.model.document import Document
 
 class SalesReconciliation(Document):
 
-	def on_submit(self):
-		pass
-		"""
+	def generate_invoice(self):
+		if frappe.db.exists("Sales Invoices", {"sales_reconciliation": self.name}):
+			frappe.throw("An invoice exists already for this Sales closing!")
+			
 		invoice_details = []
 		for i in self.items:
 			max_qty = i.sales
@@ -45,14 +46,15 @@ class SalesReconciliation(Document):
 				"customer": self.customer,
 				"company": self.company,
 				"set_posting_time": 1,
-				"posting_date": d.date,
+				"posting_date": self.date,
+				"posting_time": "23:50",
 				"currency": self.currency,
 				"branch": self.branch,
 				"set_warehouse": self.warehouse,
 				"doctype": "Sales Invoice",
 				"docstatus": 0,
 				"update_stock": 1,
-				"sales_data": self.name,
+				"sales_reconciliation": self.name,
 				"items": invoice_details,
 			}
 		)
@@ -68,8 +70,7 @@ class SalesReconciliation(Document):
 			args.update({"taxes": [tax]})
 			sale = frappe.get_doc(args)
 			sale.insert()
-			sale.submit()
-		"""
+			#sale.save()
 
 	@frappe.whitelist()
 	def get_items(self):
