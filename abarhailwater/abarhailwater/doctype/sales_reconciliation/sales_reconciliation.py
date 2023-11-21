@@ -5,7 +5,8 @@ import frappe
 from frappe.model.document import Document
 
 class SalesReconciliation(Document):
-
+	
+	@frappe.whitelist()
 	def generate_invoice(self):
 		if frappe.db.exists("Sales Invoices", {"sales_reconciliation": self.name}):
 			frappe.throw("An invoice exists already for this Sales closing!")
@@ -14,7 +15,7 @@ class SalesReconciliation(Document):
 		for i in self.items:
 			if i.sales == 0:
 				continue
-				
+
 			max_qty = i.sales
 			batches = frappe.db.get_list("Batch", fields=["name", "batch_qty"], filters={"item":i.item, "batch_qty": [">",0]}, order_by="batch_qty desc")
 			for b in batches:
