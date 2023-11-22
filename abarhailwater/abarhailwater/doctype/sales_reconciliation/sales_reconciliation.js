@@ -7,7 +7,7 @@ frappe.ui.form.on('Sales Reconciliation', {
 			frm.call('get_items');
 		},"Utilities");
 		frm.add_custom_button(__("Generate Invoice"), function() {
-			frm.call('generate_invoice');
+			frm.call('generate_invoice').then(frm.refresh());
 		},"Utilities");
 	}
 });
