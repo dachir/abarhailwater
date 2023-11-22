@@ -166,4 +166,5 @@ class SalesData2(Document):
 				# Send the error to log
 				#frappe.log_error(e)
 			finally:
-                frappe.msgprint(str(failed_records))
+				frappe.msgprint(str(failed_records))
+				
