@@ -95,7 +95,7 @@ class SalesData2(Document):
 			batches = get_batch_qty(warehouse=self.warehouse, item_code = d.productname, posting_date = frappe.utils.getdate(last_billdate), posting_time = "23:50")
 			
 			for b in batches:
-				if b.actual_qty >= max_qty:
+				if b.qty >= max_qty:
 					details = frappe._dict({
 						"item_code": d.productname,
 						"qty": max_qty,
@@ -108,12 +108,12 @@ class SalesData2(Document):
 				else:
 					details = frappe._dict({
 						"item_code": d.productname,
-						"qty": b.actual_qty,
+						"qty": b.qty,
 						"rate" : float(d.grossamount) / float(d.quantity),
 						"doctype": "Sales Invoice Item",
 					})
 					invoice_details.append(details)
-					max_qty = max_qty - b.actual_qty
+					max_qty = max_qty - b.qty
 
 			if max_qty > 0:
 				details = frappe._dict({

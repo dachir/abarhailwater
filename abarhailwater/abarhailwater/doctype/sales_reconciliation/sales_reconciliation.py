@@ -21,7 +21,7 @@ class SalesReconciliation(Document):
 			#batches = frappe.db.get_list("Batch", fields=["name", "batch_qty"], filters={"item":i.item, "batch_qty": [">",0]}, order_by="manufacturing_date asc, batch_qty desc")
 			batches = get_batch_qty(warehouse=self.warehouse, item_code = i.item, posting_date = self.date, posting_time = "23:50")
 			for b in batches:
-				if b.actual_qty >= max_qty:
+				if b.qty >= max_qty:
 					details = frappe._dict({
 						"item_code": i.item,
 						"qty": max_qty,
@@ -33,11 +33,11 @@ class SalesReconciliation(Document):
 				else:
 					details = frappe._dict({
 						"item_code": i.item,
-						"qty": b.actual_qty,
+						"qty": b.qty,
 						"doctype": "Sales Invoice Item",
 					})
 					invoice_details.append(details)
-					max_qty = max_qty - b.actual_qty
+					max_qty = max_qty - b.qty
 
 			if max_qty > 0:
 				details = frappe._dict({
@@ -83,7 +83,7 @@ class SalesReconciliation(Document):
 		if self.warehouse:
 			items = frappe.db.sql(
 				"""
-					SELECT item_code, warehouse, actual_qty
+					SELECT item_code, warehouse, qty
 					FROM tabBin
 					WHERE warehouse = %s
 				""",(self.warehouse), as_dict = 1
@@ -93,9 +93,9 @@ class SalesReconciliation(Document):
 			for i in items :
 				self.append('items',{
 						"item": i.item_code,
-						"initial_stock": i.actual_qty,
+						"initial_stock": i.qty,
 						"final_stock": 0,
-						"sales": i.actual_qty,
+						"sales": i.qty,
 					}
 				)
 		else:
