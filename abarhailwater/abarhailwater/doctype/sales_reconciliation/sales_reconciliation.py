@@ -17,7 +17,7 @@ class SalesReconciliation(Document):
 				continue
 
 			max_qty = i.sales
-			batches = frappe.db.get_list("Batch", fields=["name", "batch_qty"], filters={"item":i.item, "batch_qty": [">",0]}, order_by="batch_qty desc")
+			batches = frappe.db.get_list("Batch", fields=["name", "batch_qty"], filters={"item":i.item, "batch_qty": [">",0]}, order_by="manufacturing_date asc, batch_qty desc")
 			for b in batches:
 				if b.batch_qty >= max_qty:
 					details = frappe._dict({

@@ -22,7 +22,7 @@ class LoadingSlip(Document):
                             max_qty = int(d.get(n))
                             it_code = frappe.get_meta(doctype).get_label(n)
                             item_code = it_code if it_code != 'EMPTY BOTTLE 5 GALLON' else 'EMPTY BOTTLE 5 GALLON - ABAR'
-                            batches = frappe.db.get_list("Batch", fields=["name", "batch_qty"], filters={"item":item_code, "batch_qty": [">",0]}, order_by="batch_qty desc")
+                            batches = frappe.db.get_list("Batch", fields=["name", "batch_qty"], filters={"item":i.item, "batch_qty": [">",0]}, order_by="manufacturing_date asc, batch_qty desc")
                             for b in batches:
                                 if b.batch_qty >= max_qty:
                                     details = frappe._dict({
