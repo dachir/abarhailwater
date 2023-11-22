@@ -7,6 +7,7 @@ from frappe.exceptions import LinkValidationError
 import traceback
 import csv
 import os
+from erpnext.stock.doctype.batch.batch import get_batch_qty
 
 class SalesData2(Document):
 	

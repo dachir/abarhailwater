@@ -3,6 +3,7 @@
 
 import frappe
 from frappe.model.document import Document
+from erpnext.stock.doctype.batch.batch import get_batch_qty
 
 class SalesReconciliation(Document):
 	
