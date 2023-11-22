@@ -83,18 +83,21 @@ class LoadingSlip(Document):
 
             if details :
                 sale = frappe.get_doc(args)
-                try:
-                    sale.insert()
-                    sale.submit()
-                except Exception as e:
-                    failed_records.append({"Loading Slip number" : last_num, "Sales Person": last_sales_person})
+                sale.insert()
+                sale.submit()
+                #try:
+                    #sale.insert()
+                    #sale.submit()
+                #except Exception as e:
+                    #failed_records.append({"Loading Slip number" : last_num, "Sales Person": last_sales_person})
                     #frappe.msgprint(last_num)
                     #frappe.throw("Last Error Number: " + str(last_num) + "\n" + "Data: " +str(args) + "\n" + "Insertion stopped")
 
                     # Send the error to log
                     #frappe.log_error(e)
-                finally:
-                   frappe.msgprint(str(failed_records)) 
+                    frappe.throw(e)
+                #finally:
+                #   frappe.msgprint(str(failed_records)) 
 
     def on_cancel(self):
         #self.ignore_linked_doctypes = "GL Entry"

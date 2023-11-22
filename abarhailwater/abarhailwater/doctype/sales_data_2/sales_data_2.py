@@ -157,16 +157,19 @@ class SalesData2(Document):
 			})
 			args.update({"taxes": [tax]})
 			sale = frappe.get_doc(args)
-			try:
-				sale.insert()
-				sale.submit()
-			except Exception as e:
+			sale.insert()
+			sale.submit()
+			#try:
+				#sale.insert()
+				#sale.submit()
+			#except Exception as e:
 				# Add the failed record to the list
-				failed_records.append({"Sales Data" : last_num, "Customer Name": last_customername})
+				#failed_records.append({"Sales Data" : last_num, "Customer Name": last_customername})
 				#frappe.msgprint(last_num)
 
 				# Send the error to log
 				#frappe.log_error(e)
-			finally:
-				frappe.msgprint(str(failed_records))
+				frappe.throw(e)
+			#finally:
+			#	frappe.msgprint(str(failed_records))
 				
