@@ -90,7 +90,7 @@ class SalesData2(Document):
 			last_customername = d.customername
 
 			max_qty = int(d.quantity)
-			batches = frappe.db.get_list("Batch", fields=["name", "batch_qty"], filters={"item":d.item, "batch_qty": [">",0]}, order_by="manufacturing_date asc, batch_qty desc")
+			batches = frappe.db.get_list("Batch", fields=["name", "batch_qty"], filters={"item":d.productname, "batch_qty": [">",0]}, order_by="manufacturing_date asc, batch_qty desc")
 			
 			for b in batches:
 				if b.batch_qty >= max_qty:
