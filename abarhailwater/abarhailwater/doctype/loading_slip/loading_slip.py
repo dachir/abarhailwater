@@ -33,6 +33,8 @@ class LoadingSlip(Document):
                         #batches = frappe.db.get_list("Batch", fields=["name", "batch_qty"], filters={"item":item_code, "batch_qty": [">",0]}, order_by="manufacturing_date asc, batch_qty desc")
                         batches = get_batch_qty(warehouse=self.source_warehouse, item_code = item_code, posting_date = d.slipdate, posting_time = "23:50")
                         for b in batches:
+                            if b.qty <= 0:
+                                continue
                             if b.qty >= max_qty:
                                 details = frappe._dict({
                                     "s_warehouse": self.source_warehouse,

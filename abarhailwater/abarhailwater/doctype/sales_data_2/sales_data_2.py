@@ -95,6 +95,9 @@ class SalesData2(Document):
 			batches = get_batch_qty(warehouse=self.warehouse, item_code = d.productname, posting_date = frappe.utils.getdate(last_billdate), posting_time = "23:50")
 			
 			for b in batches:
+				if b.qty <= 0:
+					continue
+
 				if b.qty >= max_qty:
 					details = frappe._dict({
 						"item_code": d.productname,
