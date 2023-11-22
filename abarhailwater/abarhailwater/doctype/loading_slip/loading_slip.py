@@ -95,7 +95,7 @@ class LoadingSlip(Document):
 
                     # Send the error to log
                     #frappe.log_error(e)
-                    frappe.throw(e)
+                    #frappe.throw(e)
                 #finally:
                 #   frappe.msgprint(str(failed_records)) 
 
