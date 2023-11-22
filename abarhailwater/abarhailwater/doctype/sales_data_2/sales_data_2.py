@@ -160,8 +160,10 @@ class SalesData2(Document):
 				sale.submit()
 			except Exception as e:
 				# Add the failed record to the list
-				failed_records.append(args)
-				frappe.msgprint(last_num)
+				failed_records.append({"Sales Data" : last_num, "Customer Name": last_customername})
+				#frappe.msgprint(last_num)
 
 				# Send the error to log
-				frappe.log_error(e)
+				#frappe.log_error(e)
+			finally:
+                frappe.msgprint(str(failed_records))
