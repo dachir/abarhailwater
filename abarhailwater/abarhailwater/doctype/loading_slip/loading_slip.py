@@ -30,10 +30,10 @@ class LoadingSlip(Document):
                         max_qty = int(d.get(n))
                         it_code = frappe.get_meta(doctype).get_label(n)
                         item_code = it_code if it_code != 'EMPTY BOTTLE 5 GALLON' else 'EMPTY BOTTLE 5 GALLON - ABAR'
-                        #batches = frappe.db.get_list("Batch", fields=["name", "batch_qty"], filters={"item":item_code, "batch_qty": [">",0]}, order_by="manufacturing_date asc, batch_qty desc")
-                        batches = get_batch_qty(warehouse=self.source_warehouse, item_code = item_code, posting_date = d.slipdate, posting_time = "23:50")
+                        batches = frappe.db.get_list("Batch", fields=["name", "batch_qty"], filters={"item":item_code, "batch_qty": [">",0]}, order_by="manufacturing_date asc, batch_qty desc")
+                        #batches = get_batch_qty(warehouse=self.source_warehouse, item_code = item_code, posting_date = d.slipdate, posting_time = "23:50")
                         for b in batches:
-                            if b.actual_qty >= max_qty:
+                            if b.batch_qty >= max_qty:
                                 details = frappe._dict({
                                     "s_warehouse": self.source_warehouse,
                                     "t_warehouse": d.salesman + " - " + abbr,
@@ -49,11 +49,11 @@ class LoadingSlip(Document):
                                     "s_warehouse": self.source_warehouse,
                                     "t_warehouse": d.salesman + " - " + abbr,
                                     "item_code": item_code, 
-                                    "qty": b.actual_qty,
+                                    "qty": b.batch_qty,
                                     "doctype": "Stock Entry Detail",
                                 })
                                 loading_details.append(details)
-                                max_qty = max_qty - b.actual_qty
+                                max_qty = max_qty - b.batch_qty
 
                         if max_qty > 0:
                             details = frappe._dict({
