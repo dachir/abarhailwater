@@ -5,7 +5,7 @@ import frappe
 from frappe.model.document import Document
 import traceback
 
-from from erpplus.utils import get_batch_qty_2
+from erpplus.utils import get_batch_qty_2
 
 class LoadingSlip(Document):
 	
