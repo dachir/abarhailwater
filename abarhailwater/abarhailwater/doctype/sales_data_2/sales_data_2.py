@@ -18,6 +18,7 @@ class SalesData2(Document):
 		last_billdate = ''	
 		last_customername = ''
 		invoice_details = []
+		temp_batches = []
 		
 		for d in self.details:
 			
@@ -93,8 +94,15 @@ class SalesData2(Document):
 			max_qty = int(d.quantity)
 			#batches = frappe.db.get_list("Batch", fields=["name", "batch_qty"], filters={"item":d.productname, "batch_qty": [">",0]}, order_by="manufacturing_date asc, batch_qty desc")
 			batches = get_batch_qty(warehouse=self.warehouse, item_code = d.productname, posting_date = frappe.utils.getdate(last_billdate), posting_time = "23:50")
-			
 			for b in batches:
+				t_batch = frappe._dict({"batch_no" : b.batch_no,"item_code":item_code, "batch_qty": b.qty})
+				temp_batches.append(t_batch)
+
+			filtered_batches = [d for d in temp_batches if d["item_code"] == item_code]
+
+			for b in filtered_batches:
+				if not b.qty:
+                    continue
 				if b.qty <= 0:
 					continue
 
@@ -106,7 +114,9 @@ class SalesData2(Document):
 						"doctype": "Sales Invoice Item",
 					})
 					invoice_details.append(details)
+					b.qty -= max_qty
 					max_qty = 0
+					temp_batches[temp_batches.index(b)] = b
 					break
 				else:
 					details = frappe._dict({
@@ -117,6 +127,8 @@ class SalesData2(Document):
 					})
 					invoice_details.append(details)
 					max_qty = max_qty - b.qty
+					b.qty = 0
+                    temp_batches[temp_batches.index(b)] = b
 
 			if max_qty > 0:
 				details = frappe._dict({
