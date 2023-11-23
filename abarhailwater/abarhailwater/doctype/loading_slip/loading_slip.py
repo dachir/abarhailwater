@@ -19,6 +19,7 @@ class LoadingSlip(Document):
         failed_records = []
         last_num = ''
         last_sales_person = "" 
+        temp_batches = []
         
         for d in self.details:
             last_num = d.slipno
@@ -33,12 +34,18 @@ class LoadingSlip(Document):
                         #batches = frappe.db.get_list("Batch", fields=["name", "batch_qty"], filters={"item":item_code, "batch_qty": [">",0]}, order_by="manufacturing_date asc, batch_qty desc")
                         batches = get_batch_qty(warehouse=self.source_warehouse, item_code = item_code, posting_date = d.slipdate, posting_time = "23:50")
                         for b in batches:
-                            b_qty = b.qty
+                            t_batch = frappe._dict({"batch_no" : b.batch_no,"item_code":item_code, "batch_qty": b.qty})
+                            temp_batches.append(t_batch)
+
+                        filtered_batches = [d for d in temp_batches if d["item_code"] == item_code]
+
+                        for b in filtered_batches:
+                            #b_qty = b.qty
                             if b.qty <= 0:
                                 continue
                             
-                            while b_qty > 0 :
-                                if b_qty >= max_qty:
+                            while b.qty > 0 :
+                                if b.qty >= max_qty:
                                     details = frappe._dict({
                                         "s_warehouse": self.source_warehouse,
                                         "t_warehouse": d.salesman + " - " + abbr,
@@ -47,20 +54,22 @@ class LoadingSlip(Document):
                                         "doctype": "Stock Entry Detail",
                                     })
                                     loading_details.append(details)
-                                    b_qty -= max_qty
+                                    b.qty -= max_qty
                                     max_qty = 0
+                                    temp_batches[temp_batches.index(b)] = b
                                     break
                                 else:
                                     details = frappe._dict({
                                         "s_warehouse": self.source_warehouse,
                                         "t_warehouse": d.salesman + " - " + abbr,
                                         "item_code": item_code, 
-                                        "qty": b_qty,
+                                        "qty": b.qty,
                                         "doctype": "Stock Entry Detail",
                                     })
                                     loading_details.append(details)
-                                    max_qty -= b_qty
-                                    b_qty = 0
+                                    max_qty -= b.qty
+                                    b.qty = 0
+                                    temp_batches[temp_batches.index(b)] = b
 
                         if max_qty > 0:
                             details = frappe._dict({
