@@ -5,7 +5,7 @@ import frappe
 from frappe.model.document import Document
 import traceback
 
-from erpnext.stock.doctype.batch.batch import get_batch_qty
+from from erpplus.utils import get_batch_qty_2
 
 class LoadingSlip(Document):
 	
@@ -32,7 +32,7 @@ class LoadingSlip(Document):
                         it_code = frappe.get_meta(doctype).get_label(n)
                         item_code = it_code if it_code != 'EMPTY BOTTLE 5 GALLON' else 'EMPTY BOTTLE 5 GALLON - ABAR'
                         #batches = frappe.db.get_list("Batch", fields=["name", "batch_qty"], filters={"item":item_code, "batch_qty": [">",0]}, order_by="manufacturing_date asc, batch_qty desc")
-                        batches = get_batch_qty(warehouse=self.source_warehouse, item_code = item_code, posting_date = d.slipdate, posting_time = "23:50")
+                        batches = get_batch_qty_2(warehouse=self.source_warehouse, item_code = item_code, posting_date = d.slipdate, posting_time = "23:50")
                         for b in batches:
                             t_batch = frappe._dict({"batch_no" : b.batch_no,"item_code":item_code, "batch_qty": b.qty})
                             temp_batches.append(t_batch)

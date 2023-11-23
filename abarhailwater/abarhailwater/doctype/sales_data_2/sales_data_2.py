@@ -7,7 +7,7 @@ from frappe.exceptions import LinkValidationError
 import traceback
 import csv
 import os
-from erpnext.stock.doctype.batch.batch import get_batch_qty
+from from erpplus.utils import get_batch_qty_2
 
 class SalesData2(Document):
 	
@@ -93,7 +93,7 @@ class SalesData2(Document):
 
 			max_qty = int(d.quantity)
 			#batches = frappe.db.get_list("Batch", fields=["name", "batch_qty"], filters={"item":d.productname, "batch_qty": [">",0]}, order_by="manufacturing_date asc, batch_qty desc")
-			batches = get_batch_qty(warehouse=self.warehouse, item_code = d.productname, posting_date = frappe.utils.getdate(last_billdate), posting_time = "23:55")
+			batches = get_batch_qty_2(warehouse=self.warehouse, item_code = d.productname, posting_date = frappe.utils.getdate(last_billdate), posting_time = "23:55")
 			for b in batches:
 				t_batch = frappe._dict({"batch_no" : b.batch_no,"item_code":d.productname, "batch_qty": b.qty})
 				temp_batches.append(t_batch)

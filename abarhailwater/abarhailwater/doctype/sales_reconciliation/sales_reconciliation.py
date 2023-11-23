@@ -3,7 +3,7 @@
 
 import frappe
 from frappe.model.document import Document
-from erpnext.stock.doctype.batch.batch import get_batch_qty
+from from erpplus.utils import get_batch_qty_2
 
 class SalesReconciliation(Document):
 	
@@ -19,7 +19,7 @@ class SalesReconciliation(Document):
 
 			max_qty = i.sales
 			#batches = frappe.db.get_list("Batch", fields=["name", "batch_qty"], filters={"item":i.item, "batch_qty": [">",0]}, order_by="manufacturing_date asc, batch_qty desc")
-			batches = get_batch_qty(warehouse=self.warehouse, item_code = i.item, posting_date = self.date, posting_time = "23:50")
+			batches = get_batch_qty_2(warehouse=self.warehouse, item_code = i.item, posting_date = self.date, posting_time = "23:50")
 			for b in batches:
 				if b.qty <= 0:
 					continue
