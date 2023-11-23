@@ -73,7 +73,7 @@ class LoadingSlip(Document):
                     "company": self.company,
                     "set_posting_time" : 1,
                     "posting_date": d.slipdate,
-                    "posting_time": "23:50",
+                    "posting_time": "22:00",
                     "from_warehouse": self.source_warehouse,
                     "branch": self.branch,
                     "doctype": "Stock Entry",
