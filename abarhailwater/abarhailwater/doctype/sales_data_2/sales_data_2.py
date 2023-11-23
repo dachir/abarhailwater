@@ -102,7 +102,7 @@ class SalesData2(Document):
 
 			for b in filtered_batches:
 				if not b.qty:
-                    continue
+					continue
 				if b.qty <= 0:
 					continue
 
