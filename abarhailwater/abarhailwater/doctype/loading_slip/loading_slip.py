@@ -37,7 +37,7 @@ class LoadingSlip(Document):
                             if b.qty <= 0:
                                 continue
                             
-                            for b_qty > 0 :
+                            while b_qty > 0 :
                                 if b_qty >= max_qty:
                                     details = frappe._dict({
                                         "s_warehouse": self.source_warehouse,
