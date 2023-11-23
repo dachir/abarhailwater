@@ -46,6 +46,7 @@ class LoadingSlip(Document):
                             if b.qty <= 0:
                                 continue
                             
+                            frappe.msgprint(str(b.qty))
                             while b.qty > 0 :
                                 if b.qty >= max_qty:
                                     details = frappe._dict({
