@@ -106,29 +106,30 @@ class SalesData2(Document):
 				if b.qty <= 0:
 					continue
 
-				if b.qty >= max_qty:
-					details = frappe._dict({
-						"item_code": d.productname,
-						"qty": max_qty,
-						"rate" : float(d.grossamount) / float(d.quantity),
-						"doctype": "Sales Invoice Item",
-					})
-					invoice_details.append(details)
-					b.qty -= max_qty
-					max_qty = 0
-					temp_batches[temp_batches.index(b)] = b
-					break
-				else:
-					details = frappe._dict({
-						"item_code": d.productname,
-						"qty": b.qty,
-						"rate" : float(d.grossamount) / float(d.quantity),
-						"doctype": "Sales Invoice Item",
-					})
-					invoice_details.append(details)
-					max_qty = max_qty - b.qty
-					b.qty = 0
-					temp_batches[temp_batches.index(b)] = b
+				while b.qty > 0 :
+					if b.qty >= max_qty:
+						details = frappe._dict({
+							"item_code": d.productname,
+							"qty": max_qty,
+							"rate" : float(d.grossamount) / float(d.quantity),
+							"doctype": "Sales Invoice Item",
+						})
+						invoice_details.append(details)
+						b.qty -= max_qty
+						max_qty = 0
+						temp_batches[temp_batches.index(b)] = b
+						break
+					else:
+						details = frappe._dict({
+							"item_code": d.productname,
+							"qty": b.qty,
+							"rate" : float(d.grossamount) / float(d.quantity),
+							"doctype": "Sales Invoice Item",
+						})
+						invoice_details.append(details)
+						max_qty = max_qty - b.qty
+						b.qty = 0
+						temp_batches[temp_batches.index(b)] = b
 
 			if max_qty > 0:
 				details = frappe._dict({
