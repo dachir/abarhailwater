@@ -33,29 +33,34 @@ class LoadingSlip(Document):
                         #batches = frappe.db.get_list("Batch", fields=["name", "batch_qty"], filters={"item":item_code, "batch_qty": [">",0]}, order_by="manufacturing_date asc, batch_qty desc")
                         batches = get_batch_qty(warehouse=self.source_warehouse, item_code = item_code, posting_date = d.slipdate, posting_time = "23:50")
                         for b in batches:
+                            b_qty = b.qty
                             if b.qty <= 0:
                                 continue
-                            if b.qty >= max_qty:
-                                details = frappe._dict({
-                                    "s_warehouse": self.source_warehouse,
-                                    "t_warehouse": d.salesman + " - " + abbr,
-                                    "item_code": item_code, 
-                                    "qty": max_qty,
-                                    "doctype": "Stock Entry Detail",
-                                })
-                                loading_details.append(details)
-                                max_qty = 0
-                                break
-                            else:
-                                details = frappe._dict({
-                                    "s_warehouse": self.source_warehouse,
-                                    "t_warehouse": d.salesman + " - " + abbr,
-                                    "item_code": item_code, 
-                                    "qty": b.qty,
-                                    "doctype": "Stock Entry Detail",
-                                })
-                                loading_details.append(details)
-                                max_qty = max_qty - b.qty
+                            
+                            for b_qty > 0 :
+                                if b_qty >= max_qty:
+                                    details = frappe._dict({
+                                        "s_warehouse": self.source_warehouse,
+                                        "t_warehouse": d.salesman + " - " + abbr,
+                                        "item_code": item_code, 
+                                        "qty": max_qty,
+                                        "doctype": "Stock Entry Detail",
+                                    })
+                                    loading_details.append(details)
+                                    b_qty -= max_qty
+                                    max_qty = 0
+                                    break
+                                else:
+                                    details = frappe._dict({
+                                        "s_warehouse": self.source_warehouse,
+                                        "t_warehouse": d.salesman + " - " + abbr,
+                                        "item_code": item_code, 
+                                        "qty": b_qty,
+                                        "doctype": "Stock Entry Detail",
+                                    })
+                                    loading_details.append(details)
+                                    max_qty -= b_qty
+                                    b_qty = 0
 
                         if max_qty > 0:
                             details = frappe._dict({
