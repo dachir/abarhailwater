@@ -86,7 +86,7 @@ class SalesReconciliation(Document):
 		if self.warehouse:
 			items = frappe.db.sql(
 				"""
-					SELECT item_code, warehouse, qty
+					SELECT item_code, warehouse, actual_qty as qty
 					FROM tabBin
 					WHERE warehouse = %s
 				""",(self.warehouse), as_dict = 1
