@@ -100,7 +100,7 @@ class SalesData2(Document):
 
 			filtered_batches = [d for d in temp_batches if d.item_code == d.productname]
 
-			frappe.msgprint(str(filtered_batches))
+			frappe.throw(str(filtered_batches))
 			for b in filtered_batches:
 				if not b.qty:
 					continue
