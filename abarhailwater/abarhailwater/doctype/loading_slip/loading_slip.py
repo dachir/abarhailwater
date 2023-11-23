@@ -41,6 +41,8 @@ class LoadingSlip(Document):
 
                         for b in filtered_batches:
                             #b_qty = b.qty
+                            if not b.qty:
+                                continue
                             if b.qty <= 0:
                                 continue
                             
