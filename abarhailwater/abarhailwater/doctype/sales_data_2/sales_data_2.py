@@ -98,7 +98,7 @@ class SalesData2(Document):
 				t_batch = frappe._dict({"batch_no" : b.batch_no,"item_code":d.productname, "batch_qty": b.qty})
 				temp_batches.append(t_batch)
 
-			filtered_batches = [d for d in temp_batches if d.item_code == d.productname]
+			filtered_batches = [d for d in temp_batches if d["item_code"] == d.productname]
 
 			frappe.throw(str(filtered_batches))
 			for b in filtered_batches:
