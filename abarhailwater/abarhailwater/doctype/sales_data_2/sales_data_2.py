@@ -95,13 +95,13 @@ class SalesData2(Document):
 			#batches = frappe.db.get_list("Batch", fields=["name", "batch_qty"], filters={"item":d.productname, "batch_qty": [">",0]}, order_by="manufacturing_date asc, batch_qty desc")
 			batches = get_batch_qty_2(warehouse=self.warehouse, item_code = d.productname, posting_date = frappe.utils.getdate(last_billdate), posting_time = "23:55")
 			for b in batches:
-				t_batch = frappe._dict({"batch_no" : b.batch_no,"item_code":d.productname, "batch_qty": b.qty})
+				t_batch = frappe._dict({"batch_no" : b.batch_no,"item_code":d.productname, "qty": b.qty})
 				temp_batches.append(t_batch)
 
 			item_code = d.productname
 			filtered_batches = [d for d in temp_batches if d["item_code"] == item_code]
 
-			frappe.throw(str(filtered_batches))
+			#frappe.throw(str(filtered_batches))
 			for b in filtered_batches:
 				if not b.qty:
 					continue
