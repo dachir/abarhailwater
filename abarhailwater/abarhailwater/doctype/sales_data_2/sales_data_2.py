@@ -35,7 +35,7 @@ class SalesData2(Document):
 								"company": self.company,
 								"set_posting_time": 1,
 								"posting_date": frappe.utils.getdate(last_billdate),
-								"posting_time": "23:45",
+								"posting_time": "23:55",
 								"currency": self.currency,
 								"branch": self.branch,
 								"set_warehouse": self.warehouse,
@@ -93,7 +93,7 @@ class SalesData2(Document):
 
 			max_qty = int(d.quantity)
 			#batches = frappe.db.get_list("Batch", fields=["name", "batch_qty"], filters={"item":d.productname, "batch_qty": [">",0]}, order_by="manufacturing_date asc, batch_qty desc")
-			batches = get_batch_qty_2(warehouse=self.warehouse, item_code = d.productname, posting_date = frappe.utils.getdate(last_billdate), posting_time = "23:45")
+			batches = get_batch_qty_2(warehouse=self.warehouse, item_code = d.productname, posting_date = frappe.utils.getdate(last_billdate), posting_time = "23:55")
 			for b in batches:
 				t_batch = frappe._dict({"batch_no" : b.batch_no,"item_code":d.productname, "qty": b.qty})
 				temp_batches.append(t_batch)
