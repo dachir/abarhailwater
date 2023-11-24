@@ -115,6 +115,7 @@ class SalesData2(Document):
 							"item_code": d.productname,
 							"qty": max_qty,
 							"rate" : float(d.grossamount) / float(d.quantity),
+							"batch_no": d.batch_no,
 							"doctype": "Sales Invoice Item",
 						})
 						invoice_details.append(details)
@@ -127,6 +128,7 @@ class SalesData2(Document):
 							"item_code": d.productname,
 							"qty": b.qty,
 							"rate" : float(d.grossamount) / float(d.quantity),
+							"batch_no": d.batch_no,
 							"doctype": "Sales Invoice Item",
 						})
 						invoice_details.append(details)
