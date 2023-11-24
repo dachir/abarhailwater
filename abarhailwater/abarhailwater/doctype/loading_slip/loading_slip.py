@@ -34,7 +34,7 @@ class LoadingSlip(Document):
                         #batches = frappe.db.get_list("Batch", fields=["name", "batch_qty"], filters={"item":item_code, "batch_qty": [">",0]}, order_by="manufacturing_date asc, batch_qty desc")
                         batches = get_batch_qty_2(warehouse=self.source_warehouse, item_code = item_code, posting_date = d.slipdate, posting_time = "23:50")
                         for b in batches:
-                            t_batch = frappe._dict({"batch_no" : b.batch_no,"item_code":item_code, "batch_qty": b.qty})
+                            t_batch = frappe._dict({"batch_no" : b.batch_no,"item_code":item_code, "qty": b.qty})
                             temp_batches.append(t_batch)
 
                         filtered_batches = [d for d in temp_batches if d["item_code"] == item_code]
@@ -46,13 +46,14 @@ class LoadingSlip(Document):
                             if b.qty <= 0:
                                 continue
                             
-                            while b.qty > 0 :
+                            while b.qty > 0 and max_qty > 0:
                                 if b.qty >= max_qty:
                                     details = frappe._dict({
                                         "s_warehouse": self.source_warehouse,
                                         "t_warehouse": d.salesman + " - " + abbr,
                                         "item_code": item_code, 
                                         "qty": max_qty,
+                                        "batch_no": b.batch_no,
                                         "doctype": "Stock Entry Detail",
                                     })
                                     loading_details.append(details)
@@ -66,6 +67,7 @@ class LoadingSlip(Document):
                                         "t_warehouse": d.salesman + " - " + abbr,
                                         "item_code": item_code, 
                                         "qty": b.qty,
+                                        "batch_no": b.batch_no,
                                         "doctype": "Stock Entry Detail",
                                     })
                                     loading_details.append(details)
