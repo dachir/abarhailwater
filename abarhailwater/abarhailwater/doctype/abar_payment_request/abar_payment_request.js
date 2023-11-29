@@ -12,6 +12,13 @@ frappe.ui.form.on('Abar Payment Request', {
 			}
 		});
 	},
+	party_type: function(frm) {
+		frm.set_value("party", "")
+		//frm.set_value("party_name", "")
+	},
+	party: function(frm) {
+		frm.call("get_party_name")
+	},
 	validate_company: (frm) => {
 		if (!frm.doc.company){
 			frappe.throw({message:__("Please select a Company first."), title: __("Mandatory")});
