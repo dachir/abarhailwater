@@ -27,7 +27,7 @@
    "fieldname": "category",
    "fieldtype": "Select",
    "label": "Category",
-   "options": "HR Bank\nPetty Cash\nFactory (RM/Spares etc.)\nGarage\nTrasporters payment\nPR/Marketing\nGeneral Expense"
+   "options": "HR Bank\nPetty Cash\nFactory (RM-Spares etc.)\nGarage\nTrasporters payment\nPR-Marketing\nGeneral Expense"
   },
   {
    "fieldname": "party_type",
@@ -105,7 +105,7 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2023-11-29 09:40:02.799258",
+ "modified": "2023-11-29 16:33:32.635099",
  "modified_by": "Administrator",
  "module": "Abarhailwater",
  "name": "Abar Payment Request",
@@ -121,6 +121,18 @@
    "read": 1,
    "report": 1,
    "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "All",
    "share": 1,
    "write": 1
   }
