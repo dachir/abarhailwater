@@ -19,8 +19,17 @@
   "party_type",
   "party",
   "party_name",
+  "bank_account",
+  "payee_name",
+  "bank_account_no",
   "description",
-  "amended_from"
+  "amended_from",
+  "cheque_details_tab",
+  "cheque_date",
+  "column_break_zn5ba",
+  "cheque_number",
+  "section_break_fk2cg",
+  "remark"
  ],
  "fields": [
   {
@@ -81,7 +90,8 @@
   {
    "fieldname": "description",
    "fieldtype": "Text",
-   "label": "Description"
+   "label": "Description",
+   "max_height": "100px"
   },
   {
    "default": "Today",
@@ -100,12 +110,59 @@
    "fieldtype": "Currency",
    "label": "Amount",
    "options": "currency"
+  },
+  {
+   "fieldname": "cheque_details_tab",
+   "fieldtype": "Tab Break",
+   "label": "Cheque Details"
+  },
+  {
+   "fieldname": "cheque_date",
+   "fieldtype": "Date",
+   "label": "Cheque Date"
+  },
+  {
+   "fieldname": "column_break_zn5ba",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "cheque_number",
+   "fieldtype": "Data",
+   "label": "Cheque Number"
+  },
+  {
+   "fieldname": "section_break_fk2cg",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "remark",
+   "fieldtype": "Text",
+   "label": "Remark",
+   "max_height": "100px"
+  },
+  {
+   "fieldname": "bank_account",
+   "fieldtype": "Link",
+   "label": "Bank Account",
+   "options": "Bank Account"
+  },
+  {
+   "fetch_from": "bank_account.bank_account_no",
+   "fieldname": "bank_account_no",
+   "fieldtype": "Data",
+   "label": "Bank Account No"
+  },
+  {
+   "fetch_from": "bank_account.account_name",
+   "fieldname": "payee_name",
+   "fieldtype": "Data",
+   "label": "Payee Name"
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2023-11-29 16:33:32.635099",
+ "modified": "2023-12-08 09:00:41.202664",
  "modified_by": "Administrator",
  "module": "Abarhailwater",
  "name": "Abar Payment Request",
