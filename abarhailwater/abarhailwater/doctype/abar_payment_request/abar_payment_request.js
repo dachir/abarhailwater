@@ -11,6 +11,14 @@ frappe.ui.form.on('Abar Payment Request', {
 				}
 			}
 		});
+		frm.set_query("bank_account", function() {
+			frm.events.validate_company(frm);
+			return{
+				filters: {
+					"party": frm.doc.party_name,
+				}
+			}
+		});
 	},
 	party_type: function(frm) {
 		frm.set_value("party", "")
