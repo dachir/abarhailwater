@@ -109,6 +109,7 @@ class SalesData2(Document):
 					continue
 
 				#frappe.throw(str(b.qty))
+
 				while b.qty > 0 and max_qty > 0:
 					if b.qty >= max_qty:
 						details = frappe._dict({
@@ -178,6 +179,7 @@ class SalesData2(Document):
 			})
 			args.update({"taxes": [tax]})
 			sale = frappe.get_doc(args)
+			sale.ignore_pricing_rule = 1
 			sale.insert()
 			sale.submit()
 			#try:
