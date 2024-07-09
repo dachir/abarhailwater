@@ -52,7 +52,7 @@ class PartyLedgerSummaryReport(object):
 				.select(
 					customer.name, customer.territory, customer.customer_group, customer.default_sales_partner, customer_credit_limit.credit_limit
 				)
-				.where((customer.disabled == 0)) & (customer_credit_limit.company == self.filters.get("company"))
+				.where((customer.disabled == 0) & customer_credit_limit.company == self.filters.get("company"))
 				.run(as_dict=True)
 			)
 
