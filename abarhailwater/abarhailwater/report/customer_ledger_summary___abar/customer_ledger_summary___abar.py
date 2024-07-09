@@ -43,6 +43,7 @@ class PartyLedgerSummaryReport(object):
 		if self.filters.party_type == "Customer":
 			self.territories = frappe._dict({})
 			self.customer_group = frappe._dict({})
+			self.credit_limit = frappe._dict({})
 
 			customer = qb.DocType("Customer")
 			customer_credit_limit = qb.DocType("Customer Credit Limit")
