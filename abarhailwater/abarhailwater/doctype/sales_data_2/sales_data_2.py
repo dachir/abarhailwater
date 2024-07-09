@@ -53,7 +53,7 @@ class SalesData2(Document):
 								"company": self.company,
 								"set_posting_time": 1,
 								"posting_date": frappe.utils.getdate(last_billdate),
-								"posting_time": "23:45",
+								#"posting_time": "23:45",
 								"currency": self.currency,
 								"branch": self.branch,
 								"set_warehouse": self.warehouse,
