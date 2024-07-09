@@ -225,7 +225,7 @@ class PartyLedgerSummaryReport(object):
 			if self.filters.party_type == "Customer":
 				self.party_data[gle.party].update({"territory": self.territories.get(gle.party)})
 				self.party_data[gle.party].update({"customer_group": self.customer_group.get(gle.party)})
-				self.party_data[gle.party].update({"customer_group": self.credit_limit.get(gle.party)})
+				self.party_data[gle.party].update({"credit_limit": self.credit_limit.get(gle.party)})
 			else:
 				self.party_data[gle.party].update({"supplier_group": self.supplier_group.get(gle.party)})
 
