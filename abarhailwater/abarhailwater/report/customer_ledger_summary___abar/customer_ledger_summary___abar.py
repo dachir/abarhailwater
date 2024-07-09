@@ -59,6 +59,7 @@ class PartyLedgerSummaryReport(object):
 			for x in result:
 				self.territories[x.name] = x.territory
 				self.customer_group[x.name] = x.customer_group
+				self.credit_limit[x.name] = x.credit_limit
 		else:
 			self.supplier_group = frappe._dict({})
 			supplier = qb.DocType("Supplier")
@@ -140,6 +141,13 @@ class PartyLedgerSummaryReport(object):
 			)
 
 		columns += [
+			{
+				"label": _("Credit Limit"),
+				"fieldname": "credit_limit",
+				"fieldtype": "Currency",
+				"options": "currency",
+				"width": 120,
+			},
 			{
 				"label": _("Closing Balance"),
 				"fieldname": "closing_balance",
