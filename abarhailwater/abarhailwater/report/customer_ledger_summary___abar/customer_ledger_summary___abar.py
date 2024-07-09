@@ -214,6 +214,7 @@ class PartyLedgerSummaryReport(object):
 						"invoiced_amount": 0,
 						"paid_amount": 0,
 						"return_amount": 0,
+						"credit_limit": 0,
 						"closing_balance": 0,
 						"currency": company_currency,
 					}
