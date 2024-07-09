@@ -143,15 +143,15 @@ class PartyLedgerSummaryReport(object):
 
 		columns += [
 			{
-				"label": _("Credit Limit"),
-				"fieldname": "credit_limit",
+				"label": _("Closing Balance"),
+				"fieldname": "closing_balance",
 				"fieldtype": "Currency",
 				"options": "currency",
 				"width": 120,
 			},
 			{
-				"label": _("Closing Balance"),
-				"fieldname": "closing_balance",
+				"label": _("Credit Limit"),
+				"fieldname": "credit_limit",
 				"fieldtype": "Currency",
 				"options": "currency",
 				"width": 120,
@@ -215,8 +215,8 @@ class PartyLedgerSummaryReport(object):
 						"invoiced_amount": 0,
 						"paid_amount": 0,
 						"return_amount": 0,
-						"credit_limit": 0,
 						"closing_balance": 0,
+						"credit_limit": 0,
 						"currency": company_currency,
 					}
 				),
