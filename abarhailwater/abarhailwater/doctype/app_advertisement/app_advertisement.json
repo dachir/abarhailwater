@@ -13,7 +13,15 @@
   "column_break_hugvg",
   "to_date",
   "image",
-  "promotion",
+  "mecanic_section",
+  "item",
+  "promotion_type",
+  "promotion_rate",
+  "column_break_9uul8",
+  "gift",
+  "gift_type",
+  "calculation",
+  "gift_rate",
   "amended_from"
  ],
  "fields": [
@@ -60,17 +68,59 @@
   },
   {
    "depends_on": "eval:doc.with_promotion==1",
-   "fieldname": "promotion",
+   "fieldname": "mecanic_section",
+   "fieldtype": "Section Break",
+   "label": "Mecanic"
+  },
+  {
+   "fieldname": "item",
    "fieldtype": "Link",
-   "label": "Promotion",
-   "mandatory_depends_on": "eval:doc.with_promotion==1",
-   "options": "Promotional Scheme"
+   "label": "Item",
+   "options": "Item"
+  },
+  {
+   "fieldname": "promotion_type",
+   "fieldtype": "Select",
+   "label": "Promotion Type",
+   "options": "Quantity\nAmount"
+  },
+  {
+   "fieldname": "promotion_rate",
+   "fieldtype": "Float",
+   "label": "Promotion Rate"
+  },
+  {
+   "fieldname": "column_break_9uul8",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "gift",
+   "fieldtype": "Link",
+   "label": "Gift",
+   "options": "Item"
+  },
+  {
+   "fieldname": "gift_type",
+   "fieldtype": "Select",
+   "label": "Gift Type",
+   "options": "Quantity\nPrice\nAmount"
+  },
+  {
+   "fieldname": "calculation",
+   "fieldtype": "Select",
+   "label": "Calculation",
+   "options": "Value\nPercentage"
+  },
+  {
+   "fieldname": "gift_rate",
+   "fieldtype": "Float",
+   "label": "Gift Rate"
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2024-11-08 18:07:41.008966",
+ "modified": "2024-11-08 19:33:13.775761",
  "modified_by": "Administrator",
  "module": "Abarhailwater",
  "name": "App Advertisement",
